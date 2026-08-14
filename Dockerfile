@@ -14,6 +14,6 @@ WORKDIR /home/vscode
 
 COPY . /home/vscode
 
-RUN chown -R vscode:vscode /home/vscode
+RUN sudo chown -R vscode:vscode /home/vscode
 
 CMD ["python", "BrawlBot.py"]
