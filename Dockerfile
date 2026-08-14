@@ -12,4 +12,6 @@ RUN pip install --break-system-packages discord dotenv
 USER vscode
 WORKDIR /home/vscode
 
-RUN python BrawlBot.py
+COPY . /home/vscode
+
+CMD ["python", "BrawlBot.py"]
