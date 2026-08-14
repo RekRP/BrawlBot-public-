@@ -9,11 +9,11 @@ RUN pacman -Syu --noconfirm && \
 #we are in docker, dont care about venv or arch's warnings
 RUN pip install --break-system-packages discord dotenv
 
-USER vscode
-WORKDIR /home/vscode
+# USER vscode
+# WORKDIR /home/vscode
 
-COPY . /home/vscode
+COPY . /
 
-RUN sudo chown -R vscode:vscode /home/vscode
+# RUN sudo chown -R vscode:vscode /home/vscode
 
 CMD ["python", "BrawlBot.py"]
