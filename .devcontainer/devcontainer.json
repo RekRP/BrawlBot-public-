@@ -4,16 +4,18 @@
     "dockerfile": "Dockerfile-dev"
   },
   "runArgs": [
-        "--env-file", "${localWorkspaceFolder}/.env"
-    ], 
+    "--env-file",
+    "${localWorkspaceFolder}/.env"
+  ],
   "remoteUser": "vscode",
   "mounts": [
-            "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
-        ],
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python"
+        "ms-python.python",
+        "ms-python.black-formatter"
       ]
     }
   }
