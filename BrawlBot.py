@@ -1,8 +1,12 @@
+import os
 import discord
 import random
 import json
 import asyncio
+from dotenv import load_dotenv
 from discord.ext import commands
+
+load_dotenv()
 
 from brawlbot.context import create_context_from_config
 from brawlbot.message_string_util import showstagelist, channels_to_str
@@ -20,14 +24,27 @@ versus = '🆚'
 win = '🏆'
 loss = '😥'
 
-with open("secrets.json") as f:
-    secrets = json.load(f)
-    botkey = secrets['bot_key']
+env_vars = {
+    "BOT_KEY": os.getenv("BOT_KEY"),
+    "SEARCH_CHANNEL": os.getenv("SEARCH_CHANNEL"),
+    "MISC_CHANNEL": os.getenv("MISC_CHANNEL"),
+    "MOD_CHANNEL": os.getenv("MOD_CHANNEL"),
+    "MATCH_CHANNEL": os.getenv("MATCH_CHANNEL"),
+}
+missing_vars = [name for name, value in env_vars.items() if value in (None, "")]
+if missing_vars:
+    raise RuntimeError(f"Missing required environment variables: {', '.join(missing_vars)}")
+
+botkey = env_vars["BOT_KEY"]
 
 with open("config.json") as f:
     config = json.load(f)
 
     cpfx = config['command_prefix']
+    config['channels']['search'] = env_vars['SEARCH_CHANNEL']
+    config['channels']['misc'] = env_vars['MISC_CHANNEL']
+    config['channels']['mod'] = env_vars['MOD_CHANNEL']
+    config['channels']['match'] = env_vars['MATCH_CHANNEL']
 
     context = create_context_from_config(config)
 
