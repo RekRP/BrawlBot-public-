@@ -43,10 +43,10 @@ with open("config.json") as f:
     config = json.load(f)
 
     cpfx = config["command_prefix"]
-    config["channels"]["search"].append(env_vars["SEARCH_CHANNEL"])
-    config["channels"]["misc"].append(env_vars["MISC_CHANNEL"])
-    config["channels"]["mod"].append(env_vars["MOD_CHANNEL"])
-    config["channels"]["match"].append(env_vars["MATCH_CHANNEL"])
+    config["channels"]["search"] = [env_vars["SEARCH_CHANNEL"]]
+    config["channels"]["misc"] = [env_vars["MISC_CHANNEL"]]
+    config["channels"]["mod"] = [env_vars["MOD_CHANNEL"]]
+    config["channels"]["match"] = [env_vars["MATCH_CHANNEL"]]
 
     context = create_context_from_config(config)
 
