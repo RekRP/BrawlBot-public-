@@ -7,8 +7,9 @@ RUN pacman -Syu --noconfirm && \
     chmod 0440 /etc/sudoers.d/vscode
 
 #we are in docker, dont care about venv or arch's warnings
-RUN pip install --break-system-packages discord
+RUN pip install --break-system-packages discord dotenv
 
 USER vscode
 WORKDIR /home/vscode
 
+RUN python BrawlBot.py

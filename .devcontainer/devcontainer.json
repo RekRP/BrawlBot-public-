@@ -3,6 +3,9 @@
   "build": {
     "dockerfile": "Dockerfile-dev"
   },
+  "runArgs": [
+        "--env-file", "${localWorkspaceFolder}/.env"
+    ], 
   "remoteUser": "vscode",
   "mounts": [
             "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
