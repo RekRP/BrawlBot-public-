@@ -1,7 +1,13 @@
 FROM archlinux:base
 
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm base-devel git curl zsh openssh python python-pip
+    pacman -S --noconfirm base-devel git curl zsh openssh python python-pip sudo && \
+    useradd -m -s /bin/bash -U vscode && \
+    echo 'vscode ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/vscode && \
+    chmod 0440 /etc/sudoers.d/vscode
 
-RUN  pip install --break-system-packages discord
+RUN pip install --break-system-packages discord
+
+USER vscode
+WORKDIR /home/vscode
 
