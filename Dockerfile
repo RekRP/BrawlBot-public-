@@ -1,0 +1,14 @@
+FROM archlinux:base
+
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm base-devel git curl zsh python python-pip && \
+    useradd -m -s /bin/bash -U vscode && \
+    echo 'vscode ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/vscode && \
+    chmod 0440 /etc/sudoers.d/vscode
+
+#we are in docker, dont care about venv or arch's warnings
+RUN pip install --break-system-packages discord
+
+USER vscode
+WORKDIR /home/vscode
+
